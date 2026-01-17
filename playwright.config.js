@@ -10,7 +10,7 @@ export default defineConfig({
     slowMo: 5000,
     viewport: { width: 1400, height: 900 },
     video: 'retain-on-failure',
-    trace: 'retain-on-failure'
+    trace: 'on'
   },
   projects: [
     {
