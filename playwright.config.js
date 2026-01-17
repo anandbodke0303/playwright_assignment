@@ -15,15 +15,23 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: /repository_api/,
       use: { browserName: 'chromium' },
     },
     {
       name: 'firefox',
+      testIgnore: /repository_api/,
       use: { browserName: 'firefox' },
     },
     {
       name: 'webkit',
+      testIgnore: /repository_api/,
       use: { browserName: 'webkit' },
+    },
+    {
+      name: 'chromium-api',
+      testMatch: /repository_api/,
+      use: { browserName: 'chromium' },
     },
   ],
 });
