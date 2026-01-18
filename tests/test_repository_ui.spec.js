@@ -54,9 +54,22 @@ test("Code navigation", async ({ page }) => {
     await expect(tsFile).toBeVisible();
     await tsFile.click();
 
+    logStep("Verify code is displayed with line numbers");
+    await page.waitForSelector("#read-only-cursor-text-area");
+    const lineNumbers = page.locator(".react-line-numbers >div");
+    const codeLines = page.locator(".react-code-lines >div");
+
+    const lineNumberCount = await lineNumbers.count();
+    const codeLineCount = await codeLines.count();
+    
+    expect(lineNumberCount).toBeGreaterThan(0);
+    expect(codeLineCount).toBeGreaterThan(0);
+
+    expect(lineNumberCount).toBe(codeLineCount);
+
     logStep("Verify syntax highlighting is present");
     const coloreClasses = ['.pl-k, .pl-s, .pl-c, .pl-kos, .pl-c1, .pl-s1'];
-    await page.waitForTimeout(5000);
+    await page.waitForSelector("#read-only-cursor-text-area");
     for (const syntaxHighlighting of coloreClasses) {
         expect(await page.locator(syntaxHighlighting).count()).toBeGreaterThan(0);
     }
